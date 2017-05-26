@@ -3,6 +3,7 @@ import open_myo as myo
 myo_mac_addr = myo.get_myo()
 print("MAC address: %s" % myo_mac_addr)
 myo_device = myo.Device()
+myo_device.services.sleep_mode(1) # never sleep
 myo_device.services.set_leds([128, 128, 255], [128, 128, 255])  # purple logo and bar LEDs)
 myo_device.services.vibrate(1) # short vibration
 fw = myo_device.services.firmware()
@@ -12,8 +13,9 @@ print("Battery level: %d" % batt)
 myo_device.services.emg_filt_notifications()
 # myo_device.services.emg_raw_notifications()
 myo_device.services.imu_notifications()
+myo_device.services.classifier_notifications()
 # myo_device.services.battery_notifications()
-myo_device.services.set_mode(myo.emg_mode.FILT, myo.imu_mode.ALL, myo.classifier_mode.OFF)
+myo_device.services.set_mode(myo.EmgMode.FILT, myo.ImuMode.DATA, myo.ClassifierMode.ON)
 while True:
     if myo_device.services.waitForNotifications(1):
         continue
