@@ -1,3 +1,7 @@
+#  Copyright 2018 Alvaro Villoslada (Alvipe)
+#  This file is part of Open Myo.
+#  Open Myo is distributed under a GPL 3.0 license
+
 import sys
 import struct
 import time
@@ -31,7 +35,7 @@ class Services(btle.Peripheral):
             self.writeCharacteristic(WriteHandle.COMMAND, struct.pack('<3B', 3, 1, length))
 
     def sleep_mode(self, mode):
-        self.writeCharacteristic(WriteHandle.COMMAND, struct.pack('<3B', 9, 1, mode))
+        self.writeCharacteristic(WriteHandle.COMMAND, struct.pack('<3B', 9, 1, mode), True)
 
     def power_off(self):
         self.writeCharacteristic(WriteHandle.COMMAND, b'\x04\x00')
